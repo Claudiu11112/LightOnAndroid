@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LightON</string>
+    <string name="off">OFF</string>
+    <string name="off1">OFF</string>
+    <string name="on">ON</string>
+    <string name="on1">ON</string>
+    <string name="ls">Light switch</string>
+    <string name="d">Default</string>
+    <string name="toff1">OFF</string>
+    <string name="toff2">OFF</string>
+    <string name="contents">Contents</string>
+    <string name="about">About</string>
+</resources>
