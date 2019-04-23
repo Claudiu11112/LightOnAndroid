@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void onM2(View v) {
         tv = findViewById(R.id.textView4);
         if (tv.getText().equals("OFF")) {
