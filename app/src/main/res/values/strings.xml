@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LightON</string>
+    <string name="app_name">Light On/Off</string>
     <string name="off">OFF</string>
     <string name="off1">OFF</string>
     <string name="on">ON</string>
@@ -10,4 +10,5 @@
     <string name="toff2">OFF</string>
     <string name="contents">Contents</string>
     <string name="about">About</string>
+    <string name="ip">Set IP</string>
 </resources>
