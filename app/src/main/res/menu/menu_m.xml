@@ -5,6 +5,12 @@
         android:id="@+id/ip"
         android:title="@string/ip" />
     <item
+        android:id="@+id/edit"
+        android:title="@string/edit" />
+    <item
+        android:id="@+id/editoff"
+        android:title="@string/editoff" />
+    <item
         android:id="@+id/contents"
         android:title="@string/contents" />
     <item

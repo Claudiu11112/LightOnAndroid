@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv;
     //String s = "192.168.1.111";
     SharedPreferences sharedPref;
+    EditText et;
+    EditText et2;
 
 
     @Override
@@ -48,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
                 }, MINUTE);   //5 minute
             }
         }.start();
+        String s1 = sharedPref.getString("room1", "Light room 1");
+        String s2 = sharedPref.getString("room2", "Ligth room 2");
+        Log.i(TAG, s1);
+        Log.i(TAG, s2);
+        et = findViewById(R.id.editText);
+        et.setText(s1);
+        et2 = findViewById(R.id.editText2);
+        et2.setText(s2);
+
+        et2.setFocusable(false);
+        et.setFocusable(false);
+//        if (someCondition)
+//            editTextField.setFocusable(false);
+//        else
+//            editTextField.setFocusableInTouchMode(true);
+
     }
 
     @Override
@@ -92,6 +110,18 @@ public class MainActivity extends AppCompatActivity {
             adb.setMessage("IP : 192.168.1.111");
             AlertDialog ad = adb.create();
             ad.show();
+        } else if (item.getItemId() == R.id.edit) {
+            et.setFocusableInTouchMode(true);
+            et2.setFocusableInTouchMode(true);
+        } else if (item.getItemId() == R.id.editoff) {
+            et = findViewById(R.id.editText);
+            String room1 = et.getText().toString();
+            et2 = findViewById(R.id.editText2);
+            String room2 = et2.getText().toString();
+            sharedPref.edit().putString("room1", room1).apply();
+            sharedPref.edit().putString("room2", room2).apply();
+            et.setFocusable(false);
+            et2.setFocusable(false);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -179,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         });
         th.start();
         Toast t = Toast.makeText(v.getContext(), "Wait...", Toast.LENGTH_SHORT);
-        t.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+        t.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL, 0, 0);
         ViewGroup vg = (ViewGroup) t.getView();
         TextView tev = (TextView) vg.getChildAt(0);
         tev.setTextSize(30);

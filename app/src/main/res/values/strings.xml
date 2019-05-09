@@ -11,4 +11,8 @@
     <string name="contents">Contents</string>
     <string name="about">About</string>
     <string name="ip">Set IP</string>
+    <string name="LightRoom1">Light Room 1</string>
+    <string name="LightRoom2">Light Room 2</string>
+    <string name="edit">Edit On</string>
+    <string name="editoff">Edit Off</string>
 </resources>
