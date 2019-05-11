@@ -213,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup vg = (ViewGroup) t.getView();
         TextView tev = (TextView) vg.getChildAt(0);
         tev.setTextSize(25);
+        tev.setTextColor(Color.BLUE);
         t.show();
     }
 }
