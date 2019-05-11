@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     EditText et;
     EditText et2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.about) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setPositiveButton("OK", null);
-            adb.setTitle("Light On/Off v1.3");
+            adb.setTitle("Light On/Off v1.4");
             adb.setMessage("Development: Stark C.");
             AlertDialog ad = adb.create();
             ad.show();
@@ -91,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog ad = adb.create();
             ad.show();
         } else if (item.getItemId() == R.id.ip) {
+            String s = sharedPref.getString("user_id", "192.168.1.111");
             final AlertDialog.Builder adb = new AlertDialog.Builder(this);
             final EditText userInput = new EditText(this);
             adb.setView(userInput);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             adb.setTitle("Set IP:");
-            adb.setMessage("IP : 192.168.1.111");
+            adb.setMessage("IP : " + s);
             AlertDialog ad = adb.create();
             ad.show();
         } else if (item.getItemId() == R.id.edit) {
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         t.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL, 0, 0);
         ViewGroup vg = (ViewGroup) t.getView();
         TextView tev = (TextView) vg.getChildAt(0);
-        tev.setTextSize(30);
+        tev.setTextSize(25);
         t.show();
     }
 }
