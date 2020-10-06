@@ -6,13 +6,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +23,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+//import android.view.ViewGroup;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "myth";
     private TextView tv;
@@ -30,14 +32,17 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     EditText et;
     EditText et2;
-
+    private HandlerThread ht;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        final Handler h = new Handler();
+        if (ht != null) ht.quit();
+        ht = new HandlerThread("ht");
+        ht.start();
+        final Handler h = new Handler(ht.getLooper());
         final long MINUTE = 1000 * 5 * 60;
         new Thread() {
             @Override
@@ -51,8 +56,12 @@ public class MainActivity extends AppCompatActivity {
         }.start();
         String s1 = sharedPref.getString("room1", "Light room 1");
         String s2 = sharedPref.getString("room2", "Ligth room 2");
-        Log.i(TAG, s1);
-        Log.i(TAG, s2);
+        if (s1 != null) {
+            Log.i(TAG, s1);
+        }
+        if (s2 != null) {
+            Log.i(TAG, s2);
+        }
         et = findViewById(R.id.editText);
         et.setText(s1);
         et2 = findViewById(R.id.editText2);
@@ -210,10 +219,17 @@ public class MainActivity extends AppCompatActivity {
         th.start();
         Toast t = Toast.makeText(v.getContext(), "Wait...", Toast.LENGTH_SHORT);
         t.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL, 0, 0);
-        ViewGroup vg = (ViewGroup) t.getView();
-        TextView tev = (TextView) vg.getChildAt(0);
-        tev.setTextSize(25);
-        tev.setTextColor(Color.BLUE);
+//        ViewGroup vg = (ViewGroup) t.getView();
+//        TextView tev = null;
+//        if (vg != null) {
+//            tev = (TextView) vg.getChildAt(0);
+//        }
+//        if (tev != null) {
+//            tev.setTextSize(25);
+//        }
+//        if (tev != null) {
+//            tev.setTextColor(Color.BLUE);
+//        }
         t.show();
     }
 }

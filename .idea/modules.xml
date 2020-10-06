@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidDev-LightOnAndroid.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidDev-LightOnAndroid.iml" group="LightOnAndroid" />
       <module fileurl="file://$PROJECT_DIR$/LightOnAndroid.iml" filepath="$PROJECT_DIR$/LightOnAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LightOnAndroid-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LightOnAndroid-app.iml" group="LightOnAndroid/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
