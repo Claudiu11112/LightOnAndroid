@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
     private void conThread(final View v) {
 
         Thread th = new Thread(new Runnable() {
-            String s = sharedPref.getString("user_id", "192.168.1.111");
+            final String s = sharedPref.getString("user_id", "192.168.1.111");
 
             public void run() {
                 URL url;
