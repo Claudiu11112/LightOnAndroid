@@ -1,7 +1,6 @@
 package com.example.myth.lighton;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     EditText et;
     EditText et2;
     private HandlerThread ht;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +47,11 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             @Override
             public void run() {
-                h.postDelayed(new Runnable() {
-                    public void run() {
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                    }
-                }, MINUTE);   //5 minute
+                h.postDelayed(() -> getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON), MINUTE);   //5 minute
             }
         }.start();
         String s1 = sharedPref.getString("room1", "Light room 1");
-        String s2 = sharedPref.getString("room2", "Ligth room 2");
+        String s2 = sharedPref.getString("room2", "Light room 2");
         if (s1 != null) {
             Log.i(TAG, s1);
         }
@@ -103,18 +99,11 @@ public class MainActivity extends AppCompatActivity {
             final AlertDialog.Builder adb = new AlertDialog.Builder(this);
             final EditText userInput = new EditText(this);
             adb.setView(userInput);
-            adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    String sip = userInput.getText().toString();
-                    sharedPref.edit().putString("user_id", sip).apply();
-                }
+            adb.setPositiveButton("OK", (dialog, id) -> {
+                String sip = userInput.getText().toString();
+                sharedPref.edit().putString("user_id", sip).apply();
             });
-            adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            adb.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
             adb.setTitle("Set IP:");
             adb.setMessage("IP : " + s);
             AlertDialog ad = adb.create();
@@ -179,29 +168,25 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 URL url;
                 try {
-                    switch (v.getId()) {
-                        case R.id.button:
-                            url = new URL("http://" + s + "/?pin=OFF");
-                            Log.i(TAG, "conThread: button1");
-                            Log.i(TAG, url.toString());
-                            break;
-                        case R.id.button2:
-                            url = new URL("http://" + s + "/?pin=ON");
-                            Log.i(TAG, "conThread: button2");
-                            Log.i(TAG, url.toString());
-                            break;
-                        case R.id.button3:
-                            url = new URL("http://" + s + "/?pin1=OFF");
-                            Log.i(TAG, "conThread: button3");
-                            Log.i(TAG, url.toString());
-                            break;
-                        case R.id.button4:
-                            url = new URL("http://" + s + "/?pin1=ON");
-                            Log.i(TAG, "conThread: button4");
-                            Log.i(TAG, url.toString());
-                            break;
-                        default:
-                            url = null;
+                    int id = v.getId();
+                    if (id == R.id.button) {
+                        url = new URL("http://" + s + "/?pin=OFF");
+                        Log.i(TAG, "conThread: button1");
+                        Log.i(TAG, url.toString());
+                    } else if (id == R.id.button2) {
+                        url = new URL("http://" + s + "/?pin=ON");
+                        Log.i(TAG, "conThread: button2");
+                        Log.i(TAG, url.toString());
+                    } else if (id == R.id.button3) {
+                        url = new URL("http://" + s + "/?pin1=OFF");
+                        Log.i(TAG, "conThread: button3");
+                        Log.i(TAG, url.toString());
+                    } else if (id == R.id.button4) {
+                        url = new URL("http://" + s + "/?pin1=ON");
+                        Log.i(TAG, "conThread: button4");
+                        Log.i(TAG, url.toString());
+                    } else {
+                        url = null;
                     }
                     HttpURLConnection huc;
                     if (url != null) {
@@ -233,3 +218,30 @@ public class MainActivity extends AppCompatActivity {
         t.show();
     }
 }
+/*
+*  try {
+                    switch (v.getId()) {
+                        case R.id.button:
+                            url = new URL("http://" + s + "/?pin=OFF");
+                            Log.i(TAG, "conThread: button1");
+                            Log.i(TAG, url.toString());
+                            break;
+                        case R.id.button2:
+                            url = new URL("http://" + s + "/?pin=ON");
+                            Log.i(TAG, "conThread: button2");
+                            Log.i(TAG, url.toString());
+                            break;
+                        case R.id.button3:
+                            url = new URL("http://" + s + "/?pin1=OFF");
+                            Log.i(TAG, "conThread: button3");
+                            Log.i(TAG, url.toString());
+                            break;
+                        case R.id.button4:
+                            url = new URL("http://" + s + "/?pin1=ON");
+                            Log.i(TAG, "conThread: button4");
+                            Log.i(TAG, url.toString());
+                            break;
+                        default:
+                            url = null;
+                    }
+* */
