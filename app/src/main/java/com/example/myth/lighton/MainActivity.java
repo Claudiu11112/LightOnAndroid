@@ -44,12 +44,9 @@ public class MainActivity extends AppCompatActivity {
         ht.start();
         final Handler h = new Handler(ht.getLooper());
         final long MINUTE = 1000 * 5 * 60;
-        new Thread() {
-            @Override
-            public void run() {
-                h.postDelayed(() -> getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON), MINUTE);   //5 minute
-            }
-        }.start();
+        new Thread(() -> {
+            h.postDelayed(() -> getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON), MINUTE);   //5 minute
+        }).start();
         String s1 = sharedPref.getString("room1", "Light room 1");
         String s2 = sharedPref.getString("room2", "Light room 2");
         if (s1 != null) {
