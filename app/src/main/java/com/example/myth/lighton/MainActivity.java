@@ -49,12 +49,8 @@ public class MainActivity extends AppCompatActivity {
         }).start();
         String s1 = sharedPref.getString("room1", "Light room 1");
         String s2 = sharedPref.getString("room2", "Light room 2");
-        if (s1 != null) {
-            Log.i(TAG, s1);
-        }
-        if (s2 != null) {
-            Log.i(TAG, s2);
-        }
+        Log.i(TAG, s1);
+        Log.i(TAG, s2);
         et = findViewById(R.id.editText);
         et.setText(s1);
         et2 = findViewById(R.id.editText2);
